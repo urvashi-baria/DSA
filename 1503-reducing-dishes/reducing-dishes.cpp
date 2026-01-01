@@ -8,10 +8,20 @@ public:
         for(int i = n-2;i>=0;i--){
             suf[i]=satisfaction[i]+suf[i+1];
         }
-        int sum = 0;
+        int idx = -1;
         for(int i = 0;i<n;i++){
-            if(suf[i]>=0){ sum=sum+suf[i];}
+            if(suf[i]>=0){
+                idx = i;
+                break;
+            }
         }
-        return sum;
+        if(idx==-1) return 0;
+        int x = 1;
+        int maxSum = 0;
+        for(int i = idx;i<n;i++){
+            maxSum = maxSum+satisfaction[i]*x;
+            x++;
+        }
+        return maxSum;
     }
 };
