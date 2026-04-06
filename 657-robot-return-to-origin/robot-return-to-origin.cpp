@@ -7,7 +7,7 @@ public:
             if(moves[i]=='R') x++;
             else if(moves[i]=='L') x--;
             else if(moves[i]=='U') y++;
-            else if(moves[i]=='D') y--;
+            else y--;
     }
 
         if(x==0 && y==0) return true;
