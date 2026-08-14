@@ -5,13 +5,14 @@ public:
         int n = mat.size();
         int m = mat[0].size();
         int maxCount = INT_MIN;
-        int count = 0;
+        
         int row = -1;
         for(int i = 0;i<n;i++){
             int low = 0;
             int high = m-1;
             int first = 0;
             bool flag = false;
+            int count = 0;
             sort(mat[i].begin(),mat[i].end());
             while(low<=high){
                     int mid = low+(high-low)/2;
@@ -40,12 +41,10 @@ public:
                     }
             }
            
-            if(flag==false){
-               count = 0;
+            if(flag==true){
+               count = last-first+1;
             }
-            else{
-                count=last-first+1;
-            }
+            
 
             if(maxCount<count){
                row = i;
