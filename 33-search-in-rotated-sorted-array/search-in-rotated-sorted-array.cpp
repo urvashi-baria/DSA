@@ -31,7 +31,7 @@ public:
                 } else {
                     low = mid + 1;
                 }
-            else if (nums[mid + 1] <= nums[high]) {
+            else if (nums[mid] <= nums[high]) {
                 if (target >nums[mid] && target <=nums[high]) {
                     low = mid + 1;
                 } else {
