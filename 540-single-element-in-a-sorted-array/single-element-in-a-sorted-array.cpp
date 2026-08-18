@@ -15,6 +15,12 @@ public:
 
         int n = nums.size();
         if(n==1) return nums[0];
+         if(nums[0]!=nums[1]){
+            return nums[0];
+        }
+        else if(nums[n-1]!=nums[n-2]){
+            return nums[n-1];
+        }
         int low = 1;
         int high = n-2;
         while(low<=high){
@@ -27,12 +33,7 @@ public:
                 high=mid-1;
             }
         }
-        if(nums[0]!=nums[1]){
-            return nums[0];
-        }
-        else if(nums[n-1]!=nums[n-2]){
-            return nums[n-1];
-        }
+       
         return 0;
     }
 };
