@@ -1,46 +1,64 @@
 class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
+        // int n = nums.size();
+        // int count  = 0;
+        // for(int i = 0;i<n;i++){
+        //     if(nums[i]==0){
+        //         count++;
+        //     }
+        // }
+        // int prod1 = 1;
+        // for(int i = 0;i<n;i++){
+        //     prod1*=nums[i];
+        // }
+        // int prod2=1;
+        // for(int i = 0;i<n;i++){
+        //     if(nums[i]==0){
+        //         continue; 
+        //     }
+        //     prod2*=nums[i];
+        // }
+
+        // vector<int> ans(n);
+        // if(count==0){
+        //     for(int i = 0;i<n;i++){
+        //         ans[i]=prod1/nums[i];
+        //     }
+        // }
+        // else if(count==1){
+        //    for(int i = 0;i<n;i++){
+        //         if(nums[i]==0){
+        //            ans[i]=prod2;
+        //     }
+        //     else{
+        //         ans[i]=0;
+        //     }
+        //    }  
+        // }
+        // else{
+        //   for(int i = 0;i<n;i++){
+        //     ans[i]=0;
+        //   }  
+        // }
+        // return ans;
+
         int n = nums.size();
-        int count  = 0;
-        for(int i = 0;i<n;i++){
-            if(nums[i]==0){
-                count++;
-            }
+        vector<int> pref(n);
+        vector<int> suff(n);
+        pref[0]=1;
+        for(int i = 1;i<n;i++){
+            pref[i]=pref[i-1]*nums[i-1];
         }
-        int prod1 = 1;
-        for(int i = 0;i<n;i++){
-            prod1*=nums[i];
-        }
-        int prod2=1;
-        for(int i = 0;i<n;i++){
-            if(nums[i]==0){
-                continue; 
-            }
-            prod2*=nums[i];
+        suff[n-1]=1;
+        for(int i = n-2;i>=0;i--){
+            suff[i] = suff[i+1]*nums[i+1];
         }
 
-        vector<int> ans(n);
-        if(count==0){
-            for(int i = 0;i<n;i++){
-                ans[i]=prod1/nums[i];
-            }
+        for(int i = 0;i<n;i++){
+           pref[i]*=suff[i];
         }
-        else if(count==1){
-           for(int i = 0;i<n;i++){
-                if(nums[i]==0){
-                   ans[i]=prod2;
-            }
-            else{
-                ans[i]=0;
-            }
-           }  
-        }
-        else{
-          for(int i = 0;i<n;i++){
-            ans[i]=0;
-          }  
-        }
-        return ans;
+
+        return pref;
     }
 };
