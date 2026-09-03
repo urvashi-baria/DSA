@@ -1,27 +1,36 @@
 class Solution {
 public:
     int maxSatisfaction(vector<int>& satisfaction) {
-        sort(satisfaction.begin(),satisfaction.end());
         int n = satisfaction.size();
-        vector<int> suf(n);
-        suf[n-1] = satisfaction[n-1];
+        //-1,-8,0,5,-9
+        sort(satisfaction.begin(),satisfaction.end());
+        //-9,-8,-1,0,5
+        vector<int> suff(n);
+        suff[n-1]=satisfaction[n-1];
         for(int i = n-2;i>=0;i--){
-            suf[i]=satisfaction[i]+suf[i+1];
+            suff[i]=suff[i+1]+satisfaction[i];
         }
+        //suff=[-13,-4,4,5,5]
         int idx = -1;
         for(int i = 0;i<n;i++){
-            if(suf[i]>=0){
-                idx = i;
+            if(suff[i]>=0){
+                idx=i;
                 break;
             }
         }
-        if(idx==-1) return 0;
-        int x = 1;
-        int maxSum = 0;
-        for(int i = idx;i<n;i++){
-            maxSum = maxSum+satisfaction[i]*x;
-            x++;
+        //idx = 2
+        if(idx==-1){
+            return 0;
         }
-        return maxSum;
+        else{
+            int sum = 0;
+            int count = 1;
+            for(int i = idx;i<n;i++){
+               sum+=satisfaction[i]*count;
+               count++;
+            }
+            return sum;
+        }
+        return -1;
     }
 };
