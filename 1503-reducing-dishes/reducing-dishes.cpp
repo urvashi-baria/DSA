@@ -22,7 +22,7 @@ public:
         if(idx==-1){
             return 0;
         }
-        else{
+       
             int sum = 0;
             int count = 1;
             for(int i = idx;i<n;i++){
@@ -30,7 +30,6 @@ public:
                count++;
             }
             return sum;
-        }
-        return -1;
+       
     }
 };
