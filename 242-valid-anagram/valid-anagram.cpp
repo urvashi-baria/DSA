@@ -6,17 +6,11 @@ public:
         for(auto ele : s){
             m1[ele]++;
         }
-        unordered_map<char,int> m2;
-        for(auto ele : t){
-            m2[ele]++;
-        }
-
-        for(auto p:m1){
-            char ch1 = p.first;
-            int freq1 = p.second;
-            if(m2.find(ch1)!=m2.end()){
-                if(freq1!=m2[ch1]){
-                    return false;
+        for(int i = 0;i<t.length();i++){
+            if(m1.find(t[i])!=m1.end()){
+                m1[t[i]]--;
+                if(m1[t[i]]==0){
+                    m1.erase(t[i]);
                 }
             }
             else{
