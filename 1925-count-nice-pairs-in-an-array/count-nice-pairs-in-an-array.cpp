@@ -1,28 +1,28 @@
 class Solution {
 public:
-    int rev(int nums){ 
+    int rev(int num){
+        int temp=num;
         int reverse = 0;
-        while(nums!=0){  
-           int digit = nums%10;
-           reverse= reverse*10+digit;
-           nums = nums/10;
+        while(temp>0){
+            reverse=reverse*10+temp%10;
+            temp=temp/10;
         }
         return reverse;
     }
+    
     int countNicePairs(vector<int>& nums) {
-        const int MOD = 1e9+7;
-        long long count = 0;
-        int n = nums.size();
         unordered_map<int,int> m;
-        for(int i=0;i<n;i++){
-            nums[i]=nums[i]-rev(nums[i]);
-        }
-        for(int i=0;i<n;i++){
-            if(m.find(nums[i])!=m.end()){
-                count=(count+m[nums[i]])%MOD;
+        int n = nums.size();
+        long long count = 0;
+        const long long MOD = 1e9+7;
+        for(int i = 0;i<n;i++){
+            int diff = nums[i]-rev(nums[i]);
+            if(m.find(diff)!=m.end()){
+                count=(count+m[diff])%MOD;
             }
-            m[nums[i]]++;
+            m[diff]++;
         }
+        
         return count;
     }
 };
