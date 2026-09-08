@@ -1,19 +1,19 @@
 class NumArray {
 public:
-    vector<int> prefix;
+    vector<int> pref;
     NumArray(vector<int>& nums) {
         int n = nums.size();
-        prefix.resize(n);
-        prefix[0]=nums[0];
+        pref.resize(n);
+        pref[0] = nums[0];
         for(int i = 1;i<n;i++){
-            prefix[i]=nums[i]+prefix[i-1];
+            pref[i]=pref[i-1]+nums[i];
         }
     }
     
     int sumRange(int left, int right) {
-        if(left == 0) return prefix[right];
-        int val = prefix[right]-prefix[left-1];
-        return val;
+        if(left==0) return pref[right];
+        int sumR = pref[right]-pref[left-1];
+        return sumR;
     }
 };
 
