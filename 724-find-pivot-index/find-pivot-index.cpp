@@ -18,7 +18,7 @@ public:
     //      }
     //    }
     //    return -1;
-    //Optimised Appraoch
+    //Optimised Approach
       int n =nums.size();
       int totalSum = 0;
       for(int i = 0;i<n;i++){
