@@ -9,9 +9,9 @@ public:
         }
         int count=0;
         unordered_map<int,int> m;
+        m[0]=1;
         for(int j = 0;j<n;j++){
             int rem = pref[j]%k;
-            if(rem==0) count++;
             if(rem<0) rem+=k;
 
             if(m.find(rem)!=m.end()){
