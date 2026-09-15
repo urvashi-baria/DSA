@@ -11,26 +11,18 @@ public:
         
         unordered_map<int,int> m;
         m[0]=-1;
-        int maxLen = 0;
-        int len;
+        int currSum = 0;
         for(int j = 0;j<n;j++){
-            int rem = pref[j]%k;
-            if(rem==0){
-                len = j-m[rem];
-                maxLen = max(maxLen,len);
-            }
-            if(rem<0){
-                rem+=k;
-            }
+            currSum+=nums[j];
+            int rem = currSum%k;
+            if(rem<0) rem+=k;
             if(m.find(rem)!=m.end()){
-                len = j-m[rem];
-                maxLen = max(maxLen,len);
+                if(j-m[rem]>=2) return true;
             }
-            else {
-                m[rem]=j;    
+            else{
+                m[rem]=j;
             }
         }
-        if(maxLen>=2) return true;
         return false;
     }
 };
