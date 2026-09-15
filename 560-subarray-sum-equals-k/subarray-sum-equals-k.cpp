@@ -12,8 +12,9 @@ public:
        //int = pref;
        //int = frequency of pref
        int count = 0;
+       m[0]=1;
        for(int j = 0;j<n;j++){
-        if(pref[j]==k) count++;
+        // if(pref[j]==k) count++;
         int val = pref[j]-k;
         if(m.find(val)!=m.end()){
             count+=m[val];
