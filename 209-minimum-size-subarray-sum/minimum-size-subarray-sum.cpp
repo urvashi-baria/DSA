@@ -4,7 +4,7 @@ public:
         int n = nums.size();
         int minLen = INT_MAX;
         int i = 0;
-        int j = i;
+        int j = 0;
         int sum = 0;
         while(j<n){
             sum+=nums[j];
