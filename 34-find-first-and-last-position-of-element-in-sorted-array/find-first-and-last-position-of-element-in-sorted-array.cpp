@@ -1,42 +1,62 @@
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
-        int n = nums.size();
-        vector<int> ans;
-        int low1=0;
-        int high1=n-1;
-        int first_occur=-1;
-        while(low1<=high1){
-            int mid = low1+(high1-low1)/2;
-            if(nums[mid]==target){
-                first_occur=mid;
-                high1=mid-1;
-            }
-            else if(nums[mid]<target){
-                low1=mid+1;
+        vector<int> ans(2);
+        if(nums.size()==0) {
+            ans[0]=-1;
+            ans[1]=-1;
+            return ans;
+        }
+        if(nums.size()==1) {
+            if(nums[0]==target){
+                ans[0]=0;
+                ans[1]=0;
             }
             else{
-                high1=mid-1;
+               ans[0]=-1;
+               ans[1]=-1;
             }
+            return ans;
         }
-        ans.push_back(first_occur);
-        int low2=0;
-        int high2=n-1;
-        int last_occur=-1;
-        while(low2<=high2){
-            int mid = low2+(high2-low2)/2;
+        int low = 0;
+        int high = nums.size()-1;
+        //firstOccur
+        bool flag1=false;
+        while(low<=high){
+            int mid = low+(high-low)/2;
             if(nums[mid]==target){
-                last_occur=mid;
-                low2=mid+1;
+                if(mid==0||nums[mid-1]!=target) {
+                    ans[0]=mid;
+                    flag1=true;
+                    break;}
+                else if(nums[mid-1]==target){
+                   high=mid-1;
+                }
             }
-            else if(nums[mid]<target){
-                low2=mid+1;
-            }
-            else{
-                high2=mid-1;
-            }
+            else if(nums[mid]<target) low=mid+1;
+            else high=mid-1;
         }
-        ans.push_back(last_occur);
+        
+        //lastOccur
+        int l = 0;
+        int h = nums.size()-1;
+        bool flag2=false;
+        while(l<=h){
+            int mid = l+(h-l)/2;
+            if(nums[mid]==target){
+                if(mid==nums.size()-1||nums[mid+1]!=target) {
+                    ans[1]=mid;
+                    flag2=true;
+                    break;}
+                else if(nums[mid+1]==target) l=mid+1;
+            }
+            else if(nums[mid]<target) l=mid+1;
+            else h=mid-1;
+        }
+        if(flag1==false && flag2==false){
+            ans[0]=-1;
+            ans[1]=-1;
+        }
         return ans;
     }
 };
