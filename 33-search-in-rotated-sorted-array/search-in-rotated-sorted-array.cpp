@@ -1,45 +1,48 @@
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
-        int n = nums.size();
-        if (n == 1) {
-            if (nums[0] == target)
-                return 0;
-            else
-                return -1;
-        }
-        if (n == 2) {
-            if (nums[0] == target)
-                return 0;
-            else if (nums[1] == target)
-                return 1;
-            else
-                return -1;
+        int size = nums.size();
+        int low = 0;
+        int high = size - 1;
+        int k = -1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (mid == size - 1 || nums[mid] > nums[mid + 1]) {
+                k = mid;
+                break;
+            } else if (nums[mid] >= nums[low]) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
         }
 
-        int low = 0;
-        int high = n - 1;
+        low = 0;
+        high = k;
         while (low <= high) {
             int mid = low + (high - low) / 2;
             if (nums[mid] == target) {
                 return mid;
+            } else if (nums[mid] < target) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
             }
-            // left sorted
-            if (nums[low] <= nums[mid])
-                if (target >= nums[low] && target <nums[mid]) {
-                    high = mid - 1;
-                } else {
-                    low = mid + 1;
-                }
-            else if (nums[mid] <= nums[high]) {
-                if (target >nums[mid] && target <=nums[high]) {
-                    low = mid + 1;
-                } else {
-                    high = mid - 1;
-                }
-            }
-            else return -1;
         }
-        return -1;
+    
+
+        low = k + 1;
+        high = size - 1;
+        while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (nums[mid] == target) {
+            return mid;
+        } else if (nums[mid] < target) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
     }
+    return -1;
+ }
 };
